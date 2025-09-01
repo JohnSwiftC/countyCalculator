@@ -16,9 +16,12 @@ for i in range(0, len(riddles)):
 
 print("Hello, my name is Joe and I need your help! I cant seem to count all my apples, will you help me?")
 questions = ["My backpack has 31 apples, and i have 5 in my hand", "Ohh no I just dropped 12 in the dirt, how mnay do I have now?"]
-answer = ["36", "24"]
+answers = [36, 24]
 
-for i in rage(0, len(questions)):
-    print(question[i])
+for i in range(0, len(questions)):
+    print(questions[i])
     answer = input("How many apples do I have?")
-    if answer == answer{}
+    if int(answer) == answers[i]: 
+        print("That sounds right!")
+    else:
+        print("I dont think thats right!")
