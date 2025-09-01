@@ -10,3 +10,15 @@ for i in range(0, len(riddles)):
     else:
         print("False!")
     
+
+
+
+
+print("Hello, my name is Joe and I need your help! I cant seem to count all my apples, will you help me?")
+questions = ["My backpack has 31 apples, and i have 5 in my hand", "Ohh no I just dropped 12 in the dirt, how mnay do I have now?"]
+answer = ["36", "24"]
+
+for i in rage(0, len(questions)):
+    print(question[i])
+    answer = input("How many apples do I have?")
+    if answer == answer{}
