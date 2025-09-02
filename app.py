@@ -20,7 +20,7 @@ async def root(request: Request):
     )
 
 @app.get("/rate")
-async def get_rate(request: Request, taxable = 0, county = ""):
+async def get_rate(request: Request, county = ""):
      
     result = calc.get_county_rate(county, pretty=True).iloc[0]
 
@@ -28,4 +28,15 @@ async def get_rate(request: Request, taxable = 0, county = ""):
 
     return templates.TemplateResponse(
         request=request, name="answer.html", context={"answer":result,"title":"Rate for " + county}
+    )
+
+@app.get("/calculate_cost")
+async def get_cost(request: Request, taxable = 0, county = ""):
+     
+     result = calc.get_cost_for_county(taxable, county).iloc[0]
+
+     details = {"Taxable Amount":taxable}
+
+     return templates.TemplateResponse(
+        request=request, name="answer.html", context={"answer":result,"title":"Cost in " + county,"details":details}
     )
