@@ -35,7 +35,9 @@ async def get_cost(request: Request, taxable: float = 0.0, county = ""):
      
      result = calc.get_cost_for_county(taxable, county)
 
-     details = {"Taxable Amount":taxable}
+     result = "$" + str("%.2f" % round(result,2))
+
+     details = {"Taxable Amount":"$" + str("%.2f" % round(taxable,2))}
 
      return templates.TemplateResponse(
         request=request, name="answer.html", context={"answer":result,"title":"Cost in " + county,"details":details}
