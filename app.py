@@ -62,5 +62,5 @@ async def get_most_expensive(request: Request, n: int = 1, cheapest: bool = Fals
             row['effective_prop_tax_rate_23'] * 100, 2)) + "%"
 
     return templates.TemplateResponse(
-        request=request, name="answer.html", context={"title": "Most Expensive Counties", "details": details}
+        request=request, name="answer.html", context={"title": "County Rate Rankings", "details": details}
     )
