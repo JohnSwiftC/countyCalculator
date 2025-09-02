@@ -13,32 +13,35 @@ app.mount("/static", StaticFiles(directory="static"), name="static")
 
 templates = Jinja2Templates(directory="static/templates")
 
+
 @app.get("/")
 async def root(request: Request):
     return templates.TemplateResponse(
         request=request, name="index.html", context={}
     )
 
+
 @app.get("/rate")
-async def get_rate(request: Request, county = ""):
-     
+async def get_rate(request: Request, county=""):
+
     result = calc.get_county_rate(county, pretty=True)
 
-    result = str("%.2f" % round(result,2)) + "%"
+    result = str("%.2f" % round(result, 2)) + "%"
 
     return templates.TemplateResponse(
-        request=request, name="answer.html", context={"answer":result,"title":"Rate for " + county}
+        request=request, name="answer.html", context={"answer": result, "title": "Rate for " + county}
     )
 
+
 @app.get("/calculate_cost")
-async def get_cost(request: Request, taxable: float = 0.0, county = ""):
-     
-     result = calc.get_cost_for_county(taxable, county)
+async def get_cost(request: Request, taxable: float = 0.0, county=""):
 
-     result = "$" + str("%.2f" % round(result,2))
+    result = calc.get_cost_for_county(taxable, county)
 
-     details = {"Taxable Amount":"$" + str("%.2f" % round(taxable,2))}
+    result = "$" + str("%.2f" % round(result, 2))
 
-     return templates.TemplateResponse(
-        request=request, name="answer.html", context={"answer":result,"title":"Cost in " + county,"details":details}
+    details = {"Taxable Amount": "$" + str("%.2f" % round(taxable, 2))}
+
+    return templates.TemplateResponse(
+        request=request, name="answer.html", context={"answer": result, "title": "Cost in " + county, "details": details}
     )
