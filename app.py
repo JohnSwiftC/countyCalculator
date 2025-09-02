@@ -1,14 +1,21 @@
-from fastapi import FastAPI
+from fastapi import FastAPI, Request
 from fastapi.responses import HTMLResponse
 from fastapi.staticfiles import StaticFiles
 from fastapi.templating import Jinja2Templates
+
+from county import CountyCalc
+
+calc = CountyCalc("data-xQ5ws.csv")
 
 app = FastAPI()
 
 app.mount("/static", StaticFiles(directory="static"), name="static")
 
-templates = Jinja2Templates(directory="templates")
+templates = Jinja2Templates(directory="static/templates")
 
 @app.get("/")
-async def root():
-    return {"message": "dev server is up!"}
+async def root(request: Request):
+    return templates.TemplateResponse(
+        request=request, name="index.html", context={}
+    )
+
