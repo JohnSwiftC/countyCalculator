@@ -72,3 +72,15 @@ async def get_most_expensive(request: Request, n: int = 1, cheapest: bool = Fals
     return templates.TemplateResponse(
         request=request, name="answer.html", context={"title": "County Rate Rankings", "details": details}
     )
+
+@app.get("/state_average_rate")
+async def get_state_average_rate(request: Request):
+
+    states = calc.get_average_per_state()
+
+    for (k, v) in states.items():
+        states[k] = str("%.2f" % round(v * 100, 2)) + "%"
+
+    return templates.TemplateResponse(
+        request=request, name="answer.html", context={"title": "Average Rate Per State/Territory", "details": states}
+    )
