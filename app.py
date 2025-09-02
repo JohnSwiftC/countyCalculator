@@ -22,7 +22,9 @@ async def root(request: Request):
 @app.get("/rate")
 async def get_rate(request: Request, taxable = 0, county = ""):
      
-    result = calc.get_county_rate(county)
+    result = calc.get_county_rate(county, pretty=True).iloc[0]
+
+    result = str("%.2f" % round(result,2)) + "%"
 
     return templates.TemplateResponse(
         request=request, name="answer.html", context={"answer":result,"title":"Rate for " + county}
