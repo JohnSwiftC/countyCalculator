@@ -46,6 +46,7 @@ async def get_cost(request: Request, taxable: float = 0.0, county=""):
         request=request, name="answer.html", context={"answer": result, "title": "Cost in " + county, "details": details}
     )
 
+
 @app.get("/most_expensive")
 async def get_most_expensive(request: Request, n: int = 1):
 
@@ -54,7 +55,8 @@ async def get_most_expensive(request: Request, n: int = 1):
     details = {}
 
     for (i, row) in result.iterrows():
-        details[row['name']] = str("%.2f" % round(row['effective_prop_tax_rate_23'] * 100, 2)) + "%"
+        details[row['name']] = str("%.2f" % round(
+            row['effective_prop_tax_rate_23'] * 100, 2)) + "%"
 
     return templates.TemplateResponse(
         request=request, name="answer.html", context={"title": "Most Expensive Counties", "details": details}
