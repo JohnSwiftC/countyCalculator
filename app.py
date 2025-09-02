@@ -13,6 +13,14 @@ app.mount("/static", StaticFiles(directory="static"), name="static")
 
 templates = Jinja2Templates(directory="static/templates")
 
+@app.middleware("http")
+async def force_https_urls(request: Request, call_next):
+    # Thanks railway good lord
+    if request.headers.get("x-forwarded-proto") == "https":
+        request.scope["scheme"] = "https"
+    response = await call_next(request)
+    return response
+
 
 @app.get("/")
 async def root(request: Request):
