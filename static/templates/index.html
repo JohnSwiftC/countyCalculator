@@ -34,7 +34,7 @@
                     <option value="">Choose a calculator...</option>
                     <option value="rate">County Rate</option>
                     <option value="cost">Property Tax</option>
-                    <option value="ranking">Most Expensive Counties</option>
+                    <option value="ranking">County Rankings</option>
                 </select>
             </div>
 
@@ -76,12 +76,18 @@
 
             <!-- Most Expensive Counties Form -->
             <div id="ranking-form" class="dynamic-form">
-                <form method="GET" action="/most_expensive">
+                <form method="GET" action="/rankings">
                     <div class="form-section">
                         <h3>County Rankings</h3>
-                        <div class="form-group">
-                            <label for="n">Number of Counties</label>
-                            <input type="number" id="n" name="n" required>
+                        <div class="input-group"></div>
+                            <div class="form-group">
+                                <label for="n">Number of Counties</label>
+                                <input type="number" id="n" name="n" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="cheapest">Ascending</label>
+                                <input type="checkbox" id="cheapest" name="cheapest">
+                            </div>
                         </div>
                     </div>
                     <button type="submit" class="btn">Calculate Cost</button>

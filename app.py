@@ -47,10 +47,13 @@ async def get_cost(request: Request, taxable: float = 0.0, county=""):
     )
 
 
-@app.get("/most_expensive")
-async def get_most_expensive(request: Request, n: int = 1):
+@app.get("/rankings")
+async def get_most_expensive(request: Request, n: int = 1, cheapest: bool = False):
 
-    result = calc.get_nth_highest_rate(n)
+    if cheapest:
+        result = calc.get_nth_lowest_rate(n)
+    else:
+        result = calc.get_nth_highest_rate(n)
 
     details = {}
 
