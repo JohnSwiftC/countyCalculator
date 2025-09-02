@@ -22,7 +22,7 @@ async def root(request: Request):
 @app.get("/rate")
 async def get_rate(request: Request, county = ""):
      
-    result = calc.get_county_rate(county, pretty=True).iloc[0]
+    result = calc.get_county_rate(county, pretty=True)
 
     result = str("%.2f" % round(result,2)) + "%"
 
@@ -31,9 +31,9 @@ async def get_rate(request: Request, county = ""):
     )
 
 @app.get("/calculate_cost")
-async def get_cost(request: Request, taxable = 0, county = ""):
+async def get_cost(request: Request, taxable: float = 0.0, county = ""):
      
-     result = calc.get_cost_for_county(taxable, county).iloc[0]
+     result = calc.get_cost_for_county(taxable, county)
 
      details = {"Taxable Amount":taxable}
 

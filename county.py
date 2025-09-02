@@ -12,7 +12,7 @@ class CountyCalc:
         return self.data.loc[self.data['name'] == county]
     
     def get_county_rate(self, county: str, pretty=False):
-        val = self.get_county_info(county)['effective_prop_tax_rate_23']
+        val = self.get_county_info(county)['effective_prop_tax_rate_23'].iloc[0]
 
         if pretty:
             val = val * 100
