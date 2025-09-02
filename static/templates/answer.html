@@ -31,6 +31,10 @@
                 {% endfor %}
             </div>
             {% endif %}
+
+            {% if note %}
+            <p>Note: {{ note }}</p>
+            {% endif %}
             
             <div class="action-buttons">
                 <a href="/" class="btn">

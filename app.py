@@ -82,5 +82,5 @@ async def get_state_average_rate(request: Request):
         states[k] = str("%.2f" % round(v * 100, 2)) + "%"
 
     return templates.TemplateResponse(
-        request=request, name="answer.html", context={"title": "Average Rate Per State/Territory", "details": states}
+        request=request, name="answer.html", context={"title": "Average Rate Per State/Territory", "details": states, "note": "States/Territories marked as 0 do not have valid data in our data set."}
     )

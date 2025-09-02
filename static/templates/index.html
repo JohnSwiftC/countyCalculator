@@ -35,6 +35,7 @@
                     <option value="rate">County Rate</option>
                     <option value="cost">Property Tax</option>
                     <option value="ranking">County Rankings</option>
+                    <option value="average">Average Rate per State</option>
                 </select>
             </div>
 
@@ -43,11 +44,9 @@
                 <form method="GET" action="/rate">
                     <div class="form-section">
                         <h3>Rate Information</h3>
-                        <div class="input-group">
-                            <div class="form-group">
-                                <label for="county">County (ex. "Polk County, Iowa")</label>
-                                <input type="text" id="county" name="county" step="0.1" required>
-                            </div>
+                        <div class="form-group">
+                            <label for="county">County (ex. "Polk County, Iowa")</label>
+                            <input type="text" id="county" name="county" step="0.1" required>
                         </div>
                     </div>
                     <button type="submit" class="btn">Get Rate</button>
@@ -59,7 +58,7 @@
                 <form method="GET" action="/calculate_cost">
                     <div class="form-section">
                         <h3>Cost Calculation</h3>
-                        <div class="input-group">
+
                             <div class="form-group">
                                 <label for="taxable">Taxable Amount</label>
                                 <input type="number" id="taxable" name="taxable" required>
@@ -68,7 +67,7 @@
                                 <label for="county">County (ex. "Polk County, Iowa")</label>
                                 <input type="text" id="county" name="county" step="0.01" required>
                             </div>
-                        </div>
+                        
                     </div>
                     <button type="submit" class="btn">Calculate Cost</button>
                 </form>
@@ -89,6 +88,17 @@
                                 <input type="checkbox" id="cheapest" name="cheapest">
                             </div>
                         </div>
+                    </div>
+                    <button type="submit" class="btn">Get Rankings</button>
+                </form>
+            </div>
+
+            <!-- State Average Form -->
+            <div id="average-form" class="dynamic-form">
+                <form method="GET" action="/state_average_rate">
+                    <div class="form-section">
+                        <h3>Average Rate per State</h3>
+                        <p>This takes no inputs, just runs the numbers on the dataset :)</p>
                     </div>
                     <button type="submit" class="btn">Get Rankings</button>
                 </form>
