@@ -1,5 +1,5 @@
 import pandas as pd
-
+import math
 
 class CountyCalc:
     def __init__(self, csv: str):
@@ -33,8 +33,57 @@ class CountyCalc:
     def show_data(self):
         print(self.data)
 
+    def get_average_per_state(self):
+        states = {}
 
-calculator = CountyCalc("data-xQ5ws.csv")
+        for (i, row) in self.data.iterrows():
+            name_split = row['name'].split(", ")
+            name = name_split[-1]
+            if name in states:
+                try:
+                    states[name].update(float(row['effective_prop_tax_rate_23']))
+                except ValueError:
+                    pass
+            else:
+                states[name] = RollingAvg()
 
-print(calculator.get_cost_for_county(100000, "pOLk coUnty, iOwa"))
-print(calculator.get_nth_highest_rate(1))
+                try:
+                    states[name].update(float(row['effective_prop_tax_rate_23']))
+                except ValueError:
+                    pass
+
+        ret = {}
+
+        i = 0
+        for k, v in states.items():
+            avg = v.get_avg()
+            if not math.isnan(avg):
+                ret[k] = avg
+            else:
+                ret[k] = 0.0
+            i = i + 1
+
+        print(i)
+        return ret
+
+class RollingAvg:
+    def __init__(self):
+        self.val = 0
+        self.count = 0
+    
+    def update(self, val):
+        self.count = self.count + 1
+        self.val = self.val + val
+    
+    def get_avg(self):
+        return self.val / self.count
+
+def main():
+
+    calculator = CountyCalc("data-xQ5ws.csv")
+    avgs = calculator.get_average_per_state()
+
+    print(avgs)
+
+if __name__ == '__main__':
+    main()
